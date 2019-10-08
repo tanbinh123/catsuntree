@@ -1,0 +1,15 @@
+#This is how springboot work
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dororo?serverTimezone=UTC
+    data-username: root
+    data-password: Nfw123456a?
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  mvc:
+#    static-path-pattern: /static/**
+server:
+  port: 8095
+mybatis:
+  type-aliases-package: com.data
+  mapper-locations: /mapper/*.xml
+
