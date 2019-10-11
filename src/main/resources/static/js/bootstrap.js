@@ -1,5 +1,7 @@
 // #######################【本JavaScript记录全局变量、全局函数、初始化函数】##########################################
-var datas;
+var datas = {
+    "queryTime": "test"//查询时间
+};
 // 监测当前鼠标所在元素的id、其祖先元素的id
 var DomIDWhenOnmouseover, DomAncestorsIDWhenOnmouseover, DomIDWhenOnclick, DomAncestorsIDWhenOnclick;
 //###############################################################################################################################

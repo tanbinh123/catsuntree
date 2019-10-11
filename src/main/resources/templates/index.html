@@ -14,56 +14,207 @@
     <!--custom js-->
     <script src="../static/js/bootstrap.js"></script>
     <!--testing-->
-    <link rel="stylesheet" href="../static/css/testing.css">
+    <!--        <link rel="stylesheet" href="../static/css/testing.css">-->
     <script src="../static/js/testing.js"></script>
 </head>
 <body id="body">
-
 <!--===========================================================================================================-->
 <script src="../static/js/three.min.js"></script>
 <div id="world"></div>
 <script src="../static/js/canvas.js"></script>
 <!--===========================================================================================================-->
 <!--================================================body===========================================================-->
+<div id="treeButtons" style="width: 40px;">
+    <div id="expandAll" title="展开全部">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
+            <i class="layui-icon layui-icon-next"></i>
+        </button>
+    </div>
+    <div id="closeAll" title="收起全部">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
+            <i class="layui-icon layui-icon-prev"></i>
+        </button>
+    </div>
+    <div id="showCategoryID" title="重新组合节点名称展示的信息">
+        <button type="button" class="layui-btn layui-btn-sm">
+            <i class="layui-icon layui-icon-rate"></i>
+        </button>
+    </div>
+    <div id="treeInit" title="恢复最近">
+        <button type="button" class="layui-btn layui-btn-sm">
+            <i class="layui-icon layui-icon-refresh-3"></i>
+        </button>
+    </div>
+    <div id="cutTree" title="砍树">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan">
+            <i class="layui-icon layui-icon-close"></i>
+        </button>
+    </div>
+    <!--回到顶部按钮-->
+    <div id="backTop" style="display: none;">
+        <button type="button" class="layui-btn layui-btn-sm layui-bg-red">
+            <i class="layui-icon layui-icon-up"></i>
+        </button>
+    </div>
+</div>
 <div id="treeSpace">
-    <div id="treeButtons" style="width: 40px;">
-        <div id="expandAll" title="展开全部">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
-                <i class="layui-icon layui-icon-next"></i>
+    <div id="mainTree">1</div>
+    <div id="tips">2</div>
+</div>
+<div id="jdbcSpace">
+    <div style="float: right;"><i class="fa fa-wifi"></i>&nbsp;<i class="fa fa-battery"></i></div>
+    <!--    选择输入方式-->
+    <div id="jdbcInputStyle" style="text-align: center;">
+        <div id="useSelect" title="使用预设JDBC组合" style="display: inline-block; ">
+            <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan" style="width: 85px;">
+                <i class="layui-icon layui-icon-prev"></i>&nbsp;<i class="fa fa-puzzle-piece fa-2x;"></i>
             </button>
         </div>
-        <div id="closeAll" title="收起全部">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
-                <i class="layui-icon layui-icon-prev"></i>
-            </button>
-        </div>
-        <div id="showCategoryID" title="重新组合节点名称展示的信息">
-            <button type="button" class="layui-btn layui-btn-sm">
-                <i class="layui-icon layui-icon-rate"></i>
-            </button>
-        </div>
-        <div id="treeInit" title="恢复最近">
-            <button type="button" class="layui-btn layui-btn-sm">
-                <i class="layui-icon layui-icon-refresh-3"></i>
-            </button>
-        </div>
-        <div id="cutTree" title="砍树">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan">
-                <i class="layui-icon layui-icon-close"></i>
-            </button>
-        </div>
-        <!--回到顶部按钮-->
-        <div id="backTop" style="display: none;">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-red">
-                <i class="layui-icon layui-icon-up"></i>
+        <div id="useConnection" title="探索服务器" style="display: inline-block;">
+            <button type="button" class="layui-btn layui-btn-sm layui-bg-red" style="width: 250px;">
+                </i><i class="fa fa-server fa-2x;"></i>&nbsp;<i class="layui-icon layui-icon-next"></i>
             </button>
         </div>
     </div>
-    <div id="mainTree"></div>
-    <div id="tips"></div>
-</div>
-<div id="jdbcSpace">
-
+    <!--    两种具体的方式-->
+    <div id="jdbcSpaceInput" style="min-height: 275px;">
+        <!--        第一种-->
+        <div id="jdbcFormInputSpace" style="display: none">
+            <form id="jdbcFormInput" class="layui-form layui-form-pane" action="" style="text-align: center">
+                <p><i class="fa fa-paw"></i>你可以灵活选择JDBC配置</p>
+                <p>(在属性文件中添加)</p>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-paper-plane"></i>&nbsp;url</label>
+                    <div class="layui-input-block">
+                        <select id="url" name="url" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-database"></i>&nbsp;dbname</label>
+                    <div class="layui-input-block">
+                        <select id="dbname" name="dbname" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-asterisk fa-spin"></i>parameter</label>
+                    <div class="layui-input-block">
+                        <select id="parameter" name="parameter" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-user"></i>&nbsp;username</label>
+                    <div class="layui-input-block">
+                        <select id="username" name="username" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-coffee"></i>password</label>
+                    <div class="layui-input-block">
+                        <select id="password" name="password" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-cloud"></i>&nbsp;sql</label>
+                    <div class="layui-input-block">
+                        <select id="sql" name="sql" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--        第二种-->
+        <div id="jdbcExploreSpace">
+            <form id="jdbcExplore" class="layui-form layui-form-pane" action="" style="text-align: center">
+                <p>你可以直接探索服务器&nbsp;<i class="fa fa-mouse-pointer"></i></p>
+                <p>(在属性文件中添加)</p>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" title="选择一组配置"><i class="fa fa-cog fa-spin fa-2x"></i></label>
+                    <div class="layui-input-block">
+                        <select id="jdbcPreset" name="jdbcPreset" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-database fa-lg"></i></label>
+                    <div class="layui-input-block">
+                        <select id="databases" name="databases" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="fa fa-table fa-lg"></i></label>
+                    <div class="layui-input-block">
+                        <select id="tables" name="tables" lay-verify="required" lay-search>
+                            <option value=""></option>
+                            <option value="test">示例选项</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="text-align: center"><span><i title="下面的内容是最终提交的内容" class="fa fa-bar-chart fa-3x"></i>&nbsp;预览</span></div>
+    <!--    预览及最终提交的内容区-->
+    <div id="jdbcSpacePrepare">
+        <!--        <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="{" disabled>-->
+        <input type="text" name="title" required lay-verify="required" placeholder="url" autocomplete="off"
+               class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="dbname" autocomplete="off"
+               class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="parameter" autocomplete="off"
+               class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="username" autocomplete="off"
+               class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="password" autocomplete="off"
+               class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="sql" autocomplete="off"
+               class="layui-input">
+        <!--        <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="}" disabled>-->
+    </div>
+    <!--    功能按钮-->
+    <!--    <div style="text-align: center;margin-top: 8px;">-->
+    <!--        <div class="layui-btn-group">-->
+    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
+    <!--                <i class="layui-icon">&#xe654;</i>-->
+    <!--            </button>-->
+    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
+    <!--                <i class="layui-icon">&#xe642;</i>-->
+    <!--            </button>-->
+    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
+    <!--                <i class="layui-icon">&#xe640;</i>-->
+    <!--            </button>-->
+    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
+    <!--                <i class="layui-icon">&#xe602;</i>-->
+    <!--            </button>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div style="text-align: right;margin-top: 3px;">
+        <i id="history" class="fa fa-history fa-2x" style="color: blue; "></i>查询历史
+    </div>
+    <div style="text-align: center;margin-top: 3px;">
+        <i id="search" class="fa fa-3x fa-search" style="color: blue;"></i>
+    </div>
 </div>
 <!--================================================body===========================================================-->
 <!--交互-->
@@ -72,5 +223,16 @@
 <!--VueObjects-->
 <script src="../static/js/vueObjects.js"></script>
 <!--===========================================================================================================-->
+<div style="position: fixed;bottom: 10px;right: 15px;" class="fontAnimation">
+    <i title="GitHub" class="fa fa-github " style="color: wheat"></i>
+    <i title="微信" class="fa fa-wechat " style="color: wheat"></i>
+    <i title="Twitter" class="fa fa-twitter " style="color: wheat"></i>
+    <i title="微博" class="fa fa-tencent-weibo " style="color: wheat"></i>
+    <i title="2414566866@qq.com" class="fa fa-envelope " style="color: wheat"></i>
+    <i title="QQ" class="fa fa-qq " style="color: wheat"></i>
+</div>
+<div style="position: fixed;bottom: 10px;left: 15px;" class="fontAnimation">
+    <i title="到底拉w(ﾟДﾟ)w" class="fa fa-chevron-up" style="color: wheat"></i>
+</div>
 </body>
 </html>

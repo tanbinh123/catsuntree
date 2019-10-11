@@ -22,3 +22,7 @@ div[id^="jdbc"] {
     width: 100px;
     height: 100px;
 }
+
+#mainTree, #tips {
+    width: 500px;
+}
