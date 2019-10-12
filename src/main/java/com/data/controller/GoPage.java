@@ -9,4 +9,9 @@ public class GoPage {
     public String GoWelcomePage() {
         return "index";
     }
+
+    @RequestMapping("/goJdbcHistoryPage")
+    public String GoJdbcHistoryPage() {
+        return "jdbcHistory";
+    }
 }

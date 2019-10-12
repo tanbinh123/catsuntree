@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>You Found This! </title>
+    <title>CATSUNTREE</title>
     <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
     <link rel="stylesheet" href="../static/framework/font-awesome-4.7.0/css/font-awesome.css">
     <!--custom css-->
@@ -13,8 +13,9 @@
     <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
     <!--custom js-->
     <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/businessAnimation.js"></script>
     <!--testing-->
-    <!--        <link rel="stylesheet" href="../static/css/testing.css">-->
+    <!--    <link rel="stylesheet" href="../static/css/testing.css">-->
     <script src="../static/js/testing.js"></script>
 </head>
 <body id="body">
@@ -58,20 +59,97 @@
     </div>
 </div>
 <div id="treeSpace">
-    <div id="mainTree">1</div>
-    <div id="tips">2</div>
+    <!--主要的树-->
+    <div id="mainTreeSpace">
+        <ul id="mainTree" class="ztree"></ul>
+    </div>
+    <!--信息区-->
+    <div id="tips" style="padding: 5px;background-color: wheat;border-radius: 4px;min-width: 450px;">
+        <!--手风琴展示 lay-accordion:开启手风琴-->
+        <div class="layui-collapse" lay-accordion>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><i class="fa fa-tags"></i>&nbsp;提交信息</h2>
+                <div class="layui-colla-content">
+                    <p>You build current tree with the following submit info:</p>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><i class="fa fa-registered"></i>&nbsp;返回信息</h2>
+                <div class="layui-colla-content">内容区域</div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title"><i class="fa fa-gear fa-spin"></i>&nbsp;树形菜单配置</h2>
+                <div class="layui-colla-content">
+                    <!--layui-show-->
+                    <p>根据得到的元素栽种你的树：</p>
+                    <form id="formTips" class="layui-form layui-form-pane" action="">
+                        <!--选择栏目id-->
+                        <div class="layui-form-item">
+                            <div class="layui-form-mid layui-word-aux">将</div>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="0">北京</option>
+                                    <option value="1">上海</option>
+                                    <option value="2">广州</option>
+                                    <option value="3">深圳</option>
+                                    <option value="4">杭州</option>
+                                </select>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">作为栏目ID</div>
+                        </div>
+                        <!--选择父栏目id-->
+                        <div class="layui-form-item">
+                            <div class="layui-form-mid layui-word-aux">将</div>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="0">北京</option>
+                                    <option value="1">上海</option>
+                                    <option value="2">广州</option>
+                                    <option value="3">深圳</option>
+                                    <option value="4">杭州</option>
+                                </select>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">作为父栏目ID</div>
+                        </div>
+                        <!--选择栏目名称-->
+                        <div class="layui-form-item">
+                            <div class="layui-form-mid layui-word-aux">将</div>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="required">
+                                    <option value=""></option>
+                                    <option value="0">北京</option>
+                                    <option value="1">上海</option>
+                                    <option value="2">广州</option>
+                                    <option value="3">深圳</option>
+                                    <option value="4">杭州</option>
+                                </select>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">作为节点展示名称</div>
+                        </div>
+                    </form>
+                    <div style="text-align: right;">
+                        <button type="button" class="layui-btn layui-btn-sm"><i class="fa fa-tree"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 <div id="jdbcSpace">
+    <!--    decoration-->
     <div style="float: right;"><i class="fa fa-wifi"></i>&nbsp;<i class="fa fa-battery"></i></div>
-    <!--    选择输入方式-->
+    <!--    choose inputStyle from two ways-->
     <div id="jdbcInputStyle" style="text-align: center;">
         <div id="useSelect" title="使用预设JDBC组合" style="display: inline-block; ">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan" style="width: 85px;">
+            <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan" style="width: 3vw;min-width: 74px;">
                 <i class="layui-icon layui-icon-prev"></i>&nbsp;<i class="fa fa-puzzle-piece fa-2x;"></i>
             </button>
         </div>
         <div id="useConnection" title="探索服务器" style="display: inline-block;">
-            <button type="button" class="layui-btn layui-btn-sm layui-bg-red" style="width: 250px;">
+            <button type="button" class="layui-btn layui-btn-sm layui-bg-red" style="width: 13vw;min-width: 50px">
                 </i><i class="fa fa-server fa-2x;"></i>&nbsp;<i class="layui-icon layui-icon-next"></i>
             </button>
         </div>
@@ -174,55 +252,40 @@
             </form>
         </div>
     </div>
-    <div style="text-align: center"><span><i title="下面的内容是最终提交的内容" class="fa fa-bar-chart fa-3x"></i>&nbsp;预览</span></div>
+    <div id="hideOrShow" title="显示或隐藏快捷输入区">
+        <button type="button" class="layui-btn layui-btn-fluid"><i id="hideOrShow_i" class="fa fa-compress"></i></button>
+    </div>
+    <div style="text-align: center"><span><i title="The next content will be final commit！" class="fa fa-bar-chart fa-3x"></i>&nbsp;预览</span>
+    </div>
     <!--    预览及最终提交的内容区-->
     <div id="jdbcSpacePrepare">
-        <!--        <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="{" disabled>-->
-        <input type="text" name="title" required lay-verify="required" placeholder="url" autocomplete="off"
-               class="layui-input">
-        <input type="text" name="title" required lay-verify="required" placeholder="dbname" autocomplete="off"
-               class="layui-input">
-        <input type="text" name="title" required lay-verify="required" placeholder="parameter" autocomplete="off"
-               class="layui-input">
-        <input type="text" name="title" required lay-verify="required" placeholder="username" autocomplete="off"
-               class="layui-input">
-        <input type="text" name="title" required lay-verify="required" placeholder="password" autocomplete="off"
-               class="layui-input">
-        <input type="text" name="title" required lay-verify="required" placeholder="sql" autocomplete="off"
-               class="layui-input">
-        <!--        <input type="text" name="title" placeholder="" autocomplete="off" class="layui-input" value="}" disabled>-->
+        <input id="jdbcPram01" type="text" autocomplete="off" class="layui-input" placeholder="url">
+        <input id="jdbcPram02" type="text" autocomplete="off" class="layui-input" placeholder="dbname">
+        <input id="jdbcPram03" type="text" autocomplete="off" class="layui-input" placeholder="parameter">
+        <input id="jdbcPram04" type="text" autocomplete="off" class="layui-input" placeholder="username">
+        <input id="jdbcPram05" type="text" autocomplete="off" class="layui-input" placeholder="password">
+        <input id="jdbcPram06" type="text" autocomplete="off" class="layui-input" placeholder="sql">
     </div>
-    <!--    功能按钮-->
-    <!--    <div style="text-align: center;margin-top: 8px;">-->
-    <!--        <div class="layui-btn-group">-->
-    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
-    <!--                <i class="layui-icon">&#xe654;</i>-->
-    <!--            </button>-->
-    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
-    <!--                <i class="layui-icon">&#xe642;</i>-->
-    <!--            </button>-->
-    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
-    <!--                <i class="layui-icon">&#xe640;</i>-->
-    <!--            </button>-->
-    <!--            <button type="button" class="layui-btn layui-btn-sm">-->
-    <!--                <i class="layui-icon">&#xe602;</i>-->
-    <!--            </button>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <div style="text-align: right;margin-top: 3px;">
-        <i id="history" class="fa fa-history fa-2x" style="color: blue; "></i>查询历史
+    <!--function button for preview-->
+    <div style="text-align: center;margin-top: 3px; font-size: 20px;">
+        <span id="history"><i class="fa fa-history" style="color: blue;"></i>查询历史</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="useExampleJDBC"><i class="fa fa-usb" style="color: blue;"></i>使用示例</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="emptyJDBC" style="color: red;"><i class="fa fa-trash"></i>清空</span>
     </div>
+    <div style="height: 2vh;">
+        <!--        占位DIV-->
+    </div>
+    <!--    JDBC commit button-->
     <div style="text-align: center;margin-top: 3px;">
         <i id="search" class="fa fa-3x fa-search" style="color: blue;"></i>
+        <i id="searching" class="fa fa-spinner fa-pulse fa-5x" style="display: none;"></i>
     </div>
 </div>
 <!--================================================body===========================================================-->
-<!--交互-->
-<script src="../static/js/animation.js"></script>
 <!--===========================================================================================================-->
-<!--VueObjects-->
-<script src="../static/js/vueObjects.js"></script>
-<!--===========================================================================================================-->
+<!--functionButtons:share-->
 <div style="position: fixed;bottom: 10px;right: 15px;" class="fontAnimation">
     <i title="GitHub" class="fa fa-github " style="color: wheat"></i>
     <i title="微信" class="fa fa-wechat " style="color: wheat"></i>
@@ -231,8 +294,29 @@
     <i title="2414566866@qq.com" class="fa fa-envelope " style="color: wheat"></i>
     <i title="QQ" class="fa fa-qq " style="color: wheat"></i>
 </div>
+<!--functionButtons:bottomRemind-->
 <div style="position: fixed;bottom: 10px;left: 15px;" class="fontAnimation">
-    <i title="到底拉w(ﾟДﾟ)w" class="fa fa-chevron-up" style="color: wheat"></i>
+    <i title="You found the bottom ~    w(ﾟДﾟ)w" class="fa fa-chevron-up" style="color: wheat"></i>
 </div>
+<!--functionButtons:show or Hide JDBCboard-->
+<div style="position: fixed;top: 270px;right: 1px;color: wheat;" id="JDBCBoardHide">
+    <i class="fa fa-chevron-right fa-3x"></i>
+</div>
+<div style="position: fixed;top: 270px;right: 1px;color: wheat; display: none;" id="JDBCBoardShow">
+    <i class="fa fa-chevron-left fa-3x"></i>
+</div>
+<!--===========================================================================================================-->
+<!--iframe cat-->
+<div id="iframeCat" style="position: fixed;bottom: 10px;right: 320px;">
+    <audio id="voice" src="../static/other/catS.wav"></audio>
+    <iframe src="https://zhanyuzhang.github.io/lovely-cat/cat.html" frameborder="0"></iframe>
+</div>
+<!--===========================================================================================================-->
+<!--animation-->
+<script src="../static/js/animation.js"></script>
+<!--===========================================================================================================-->
+<!--VueObjects-->
+<script src="../static/js/vueObjects.js"></script>
+<!--===========================================================================================================-->
 </body>
 </html>

@@ -60,8 +60,9 @@ function createScene() {
 
     // Add the Renderer to the DOM, in the world div.
     container = document.getElementById('world');
-    container.appendChild(renderer.domElement);
-
+    if (container != null) {
+        container.appendChild(renderer.domElement);
+    }
     //RESPONSIVE LISTENER
     window.addEventListener('resize', handleWindowResize, false);
 }

@@ -22,6 +22,11 @@
     float: left;
 }
 
+#formTips > div {
+    margin-bottom: 1px;
+
+}
+
 /*#############################################################################################################################*/
 /*jdbcSpace*/
 #jdbcSpace {
@@ -34,9 +39,7 @@
     top: 15px;
     border-radius: 9px;
     background-color: wheat;
-    padding-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 10px 15px 10px 15px;
 }
 
 
@@ -53,8 +56,19 @@
     margin-bottom: 1px;
 }
 
-/*#############################################################################################################################*/
+#jdbcSpacePrepare > input {
+    /*font-family: "Microsoft Yahei";*/
+}
 
+
+/*#############################################################################################################################*/
+#globalInformation {
+    min-width: 15vw;
+    min-height: 40vh;
+
+    border-radius: 9px;
+    background-color: #69bbf5;
+}
 
 /*#############################################################################################################################*/
 /*global background-image*/
