@@ -8,10 +8,6 @@ $(function () {
 });
 // ##############################################################################################################################
 //The following functions are Not only html animation，it might be show in ajax events
-function showJDBCsearchingStatus() {
-    $("#search").hide();
-    $("#searching").show();
-}
 
 
 // ##############################################################################################################################
@@ -127,3 +123,66 @@ function catVoice() {
 
 // ##############################################################################################################################
 
+//对用户输入的jdbc进行简单校验
+function JDBCInputVerification() {
+    var allIsOk = true;
+    if (jdbcInput.all.url == null || jdbcInput.all.url.trim() == "") {
+        LayerTips("不能为空", "#jdbcPram01", 4, "#75baaa",true);
+        allIsOk = false;
+    }
+    if (jdbcInput.all.dbname == null || jdbcInput.all.dbname.trim() == "") {
+        LayerTips("不能为空", "#jdbcPram02", 4, "#78BA32",true);
+        allIsOk = false;
+    }
+    // if (jdbcInput.all.parameter == null || jdbcInput.all.parameter.trim() == "") {
+    //     LayerTips("不能为空", "#jdbcPram03", 4, "#78BA32",true);
+    //     allIsOk = false;
+    // }
+    if (jdbcInput.all.username == null || jdbcInput.all.username.trim() == "") {
+        LayerTips("不能为空", "#jdbcPram04", 4, "#dbcf17",true);
+        allIsOk = false;
+    }
+    if (jdbcInput.all.password == null || jdbcInput.all.password.trim() == "") {
+        LayerTips("不能为空", "#jdbcPram05", 4, "#4938ba",true);
+        allIsOk = false;
+    }
+    if (jdbcInput.all.sql == null || jdbcInput.all.sql.trim() == "") {
+        LayerTips("不能为空", "#jdbcPram06", 4, "#ff75a7",true);
+        allIsOk = false;
+    }
+
+    return allIsOk;
+}
+
+// ###########################################【  Layui抽方法 ↓   】##############################################################
+//四个方向的tips层
+function LayerTips(msg, selector, position, color,tipsMore) {
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.tips(msg, selector, {
+            tips: [position, color],
+            tipsMore: tipsMore
+        });
+    });
+}
+
+//alert提示层
+function LayerAlert(msg, skin, closeBtn, anim) {
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.alert(msg, {
+            skin: skin
+            , closeBtn: closeBtn
+            , anim: anim //动画类型
+        });
+    });
+}
+
+function LayerMsg(msg) {
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.msg(msg);
+    });
+}
+
+// ###########################################【  Layui抽方法 ↑   】##############################################################

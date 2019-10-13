@@ -68,7 +68,7 @@
         <!--手风琴展示 lay-accordion:开启手风琴-->
         <div class="layui-collapse" lay-accordion>
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title"><i class="fa fa-tags"></i>&nbsp;提交信息</h2>
+                <h2 class="layui-colla-title"><i class="fa fa-tags"></i>&nbsp;提交记录</h2>
                 <div class="layui-colla-content">
                     <p>You build current tree with the following submit info:</p>
                 </div>
@@ -257,14 +257,14 @@
     </div>
     <div style="text-align: center"><span><i title="The next content will be final commit！" class="fa fa-bar-chart fa-3x"></i>&nbsp;预览</span>
     </div>
-    <!--    预览及最终提交的内容区-->
+    <!--预览及最终提交的内容区-->
     <div id="jdbcSpacePrepare">
-        <input id="jdbcPram01" type="text" autocomplete="off" class="layui-input" placeholder="url">
-        <input id="jdbcPram02" type="text" autocomplete="off" class="layui-input" placeholder="dbname">
-        <input id="jdbcPram03" type="text" autocomplete="off" class="layui-input" placeholder="parameter">
-        <input id="jdbcPram04" type="text" autocomplete="off" class="layui-input" placeholder="username">
-        <input id="jdbcPram05" type="text" autocomplete="off" class="layui-input" placeholder="password">
-        <input id="jdbcPram06" type="text" autocomplete="off" class="layui-input" placeholder="sql">
+        <input id="jdbcPram01" type="text" class="layui-input" placeholder="url" v-model:value="all.url">
+        <input id="jdbcPram02" type="text" class="layui-input" placeholder="dbname" v-model:value="all.dbname">
+        <input id="jdbcPram03" type="text" class="layui-input" placeholder="parameter" v-model:value="all.parameter">
+        <input id="jdbcPram04" type="text" class="layui-input" placeholder="username" v-model:value="all.username">
+        <input id="jdbcPram05" type="text" class="layui-input" placeholder="password" v-model:value="all.password">
+        <input id="jdbcPram06" type="text" class="layui-input" placeholder="sql" v-model:value="all.sql">
     </div>
     <!--function button for preview-->
     <div style="text-align: center;margin-top: 3px; font-size: 20px;">
@@ -277,10 +277,11 @@
     <div style="height: 2vh;">
         <!--        占位DIV-->
     </div>
-    <!--    JDBC commit button-->
-    <div style="text-align: center;margin-top: 3px;">
-        <i id="search" class="fa fa-3x fa-search" style="color: blue;"></i>
-        <i id="searching" class="fa fa-spinner fa-pulse fa-5x" style="display: none;"></i>
+    <!--JDBC commit button-->
+    <div style="text-align: center;margin-top: 3px;" id="jdbcCommitStatus" v-bind:name="status">
+        <i id="search" class="fa fa-3x fa-search" style="color: blue;" v-if="searchSeen"></i>
+        <i id="searching" class="fa fa-spinner fa-pulse fa-5x" v-if="searchingSeen"></i>
+        <i id="searchSuccess" class="fa fa-check fa-5x" v-if="searchSuccessSeen" style="color: #d91812"></i>
     </div>
 </div>
 <!--================================================body===========================================================-->
