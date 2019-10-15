@@ -14,4 +14,9 @@ public class GoPageController {
     public String GoJdbcHistoryPage() {
         return "jdbcHistory";
     }
+
+    @RequestMapping("/cat")
+    public String catsInMyHouse() {
+        return "catsInMyHouse";
+    }
 }

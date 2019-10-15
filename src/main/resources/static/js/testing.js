@@ -1,5 +1,6 @@
 $(function () {
     $("#world").remove();
+    // $("#iframeCat").remove();
     // fillJDBC();
     console.clear();
 });

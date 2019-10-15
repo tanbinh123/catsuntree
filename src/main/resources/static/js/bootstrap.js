@@ -1,13 +1,11 @@
 // #######################【本JavaScript记录全局变量、全局函数、初始化函数】##########################################
-var datas = {
-    "queryTime": "test"//查询时间
-};
+var jdbcInput_alls = [];//记录符合初步要求的jdbc提交，记录vue组件中jdbcInput的all属性的json数组(但不是记录jdbcInput.all)
 // 监测当前鼠标所在元素的id、其祖先元素的id
-var DomIDWhenOnmouseover, DomAncestorsIDWhenOnmouseover, DomIDWhenOnclick, DomAncestorsIDWhenOnclick;
+// var DomIDWhenOnmouseover, DomAncestorsIDWhenOnmouseover, DomIDWhenOnclick, DomAncestorsIDWhenOnclick;
 //###############################################################################################################################
 $(function () {
-    getDomIDWhenOnmouseover();//监测
-    getDomIDWhenOnclick();//监测
+    // getDomIDWhenOnmouseover();//监测
+    // getDomIDWhenOnclick();//监测
     //layui监测
     layui.use(['element', 'form'], function () {
         var element = layui.element;
@@ -20,7 +18,7 @@ $(function () {
 });
 //###############################################################################################################################
 //监测鼠标移动事件时，当前鼠标所在的元素的祖先元素是在body下的哪个元素，将其祖先元素的ID储存在全局变量中
-function getDomIDWhenOnmouseover() {
+/*function getDomIDWhenOnmouseover() {
     //前提：<body></body>给id="body"
     window.document.body.onmouseover = function (event) {
         var currentDOM = window.document.body;
@@ -59,11 +57,11 @@ function getDomIDWhenOnmouseover() {
         // console.log("DomIDWhenOnmouseover=" + DomIDWhenOnmouseover);
         // console.log("DomAncestorsIDWhenOnmouseover=" + DomAncestorsIDWhenOnmouseover);
     }
-}
+}*/
 
 //###############################################################################################################################
 //监测鼠标点击事件时，当前鼠标所在的元素的祖先元素是在body下的哪个元素，将其祖先元素的ID储存在全局变量中
-function getDomIDWhenOnclick() {
+/*function getDomIDWhenOnclick() {
     //前提：<body></body>给id="body"
     window.document.body.onclick = function (event) {
         var currentDOM = window.document.body;
@@ -102,7 +100,7 @@ function getDomIDWhenOnclick() {
         // console.log("DomIDWhenOnclick = " + DomIDWhenOnclick);
         // console.log("DomAncestorsIDWhenOnclick=" + DomAncestorsIDWhenOnclick);
     }
-}
+}*/
 
 //###############################################################################################################################
 //一个简单的获取当前系统时间并格式化的函数
@@ -113,6 +111,7 @@ function getCurentTime() {
     var day = now.getDate(); //日
     var hh = now.getHours(); //时
     var mm = now.getMinutes(); //分
+    var ss = now.getUTCSeconds();//秒
     var clock = year + "-";
     if (month < 10)
         clock += "0";
@@ -124,7 +123,11 @@ function getCurentTime() {
         clock += "0";
     clock += hh + ":";
     if (mm < 10) clock += '0';
-    clock += mm;
+    clock += mm + ":";
+    if (ss < 10) {
+        clock += '0'
+    }
+    clock += ss;
     return (clock);
 }
 

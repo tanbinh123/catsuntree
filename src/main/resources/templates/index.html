@@ -15,7 +15,7 @@
     <script src="../static/js/bootstrap.js"></script>
     <script src="../static/js/businessAnimation.js"></script>
     <!--testing-->
-    <!--    <link rel="stylesheet" href="../static/css/testing.css">-->
+    <!--<link rel="stylesheet" href="../static/css/testing.css">-->
     <script src="../static/js/testing.js"></script>
 </head>
 <body id="body">
@@ -139,9 +139,9 @@
     </div>
 </div>
 <div id="jdbcSpace">
-    <!--    decoration-->
+    <!--decoration-->
     <div style="float: right;"><i class="fa fa-wifi"></i>&nbsp;<i class="fa fa-battery"></i></div>
-    <!--    choose inputStyle from two ways-->
+    <!--choose inputStyle from two ways-->
     <div id="jdbcInputStyle" style="text-align: center;">
         <div id="useSelect" title="使用预设JDBC组合" style="display: inline-block; ">
             <button type="button" class="layui-btn layui-btn-sm layui-bg-cyan" style="width: 3vw;min-width: 74px;">
@@ -154,9 +154,9 @@
             </button>
         </div>
     </div>
-    <!--    两种具体的方式-->
-    <div id="jdbcSpaceInput" style="min-height: 275px;">
-        <!--        第一种-->
+    <!--两种具体的方式-->
+    <div id="jdbcSpaceInput">
+        <!--第一种-->
         <div id="jdbcFormInputSpace" style="display: none">
             <form id="jdbcFormInput" class="layui-form layui-form-pane" action="" style="text-align: center">
                 <p><i class="fa fa-paw"></i>你可以灵活选择JDBC配置</p>
@@ -217,7 +217,7 @@
                 </div>
             </form>
         </div>
-        <!--        第二种-->
+        <!--第二种-->
         <div id="jdbcExploreSpace">
             <form id="jdbcExplore" class="layui-form layui-form-pane" action="" style="text-align: center">
                 <p>你可以直接探索服务器&nbsp;<i class="fa fa-mouse-pointer"></i></p>
@@ -268,7 +268,10 @@
     </div>
     <!--function button for preview-->
     <div style="text-align: center;margin-top: 3px; font-size: 20px;">
-        <span id="history"><i class="fa fa-history" style="color: blue;"></i>查询历史</span>
+        <span id="history"
+              title="As long as non-null validation passes,All submissions will be recorded Whether the server responds or not">
+            <i class="fa fa-history" style="color: blue;"></i>查询历史
+        </span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span id="useExampleJDBC"><i class="fa fa-usb" style="color: blue;"></i>使用示例</span>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -282,6 +285,7 @@
         <i id="search" class="fa fa-3x fa-search" style="color: blue;" v-if="searchSeen"></i>
         <i id="searching" class="fa fa-spinner fa-pulse fa-5x" v-if="searchingSeen"></i>
         <i id="searchSuccess" class="fa fa-check fa-5x" v-if="searchSuccessSeen" style="color: #d91812"></i>
+        <i id="searchWarning" class="fa fa-warning fa-5x" v-if="searchWarningSeen" style="color: red;"></i>
     </div>
 </div>
 <!--================================================body===========================================================-->
@@ -308,9 +312,10 @@
 </div>
 <!--===========================================================================================================-->
 <!--iframe cat-->
-<div id="iframeCat" style="position: fixed;bottom: 10px;right: 320px;">
+<div id="iframeCat" style="position: fixed;bottom: 2px;right: 260px;">
     <audio id="voice" src="../static/other/catS.wav"></audio>
-    <iframe src="https://zhanyuzhang.github.io/lovely-cat/cat.html" frameborder="0"></iframe>
+    <!--<iframe src="https://zhanyuzhang.github.io/lovely-cat/cat.html" frameborder="0"></iframe>-->
+    <iframe src="/cat" frameborder="0" style="width: 227px;height: 160px;"></iframe>
 </div>
 <!--===========================================================================================================-->
 <!--animation-->
