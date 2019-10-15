@@ -127,11 +127,11 @@ function catVoice() {
 function JDBCInputVerification() {
     var allIsOk = true;
     if (jdbcInput.all.url == null || jdbcInput.all.url.trim() == "") {
-        LayerTips("不能为空", "#jdbcPram01", 4, "#75baaa",true);
+        LayerTips("不能为空", "#jdbcPram01", 4, "#75baaa", true);
         allIsOk = false;
     }
     if (jdbcInput.all.dbname == null || jdbcInput.all.dbname.trim() == "") {
-        LayerTips("不能为空", "#jdbcPram02", 4, "#78BA32",true);
+        LayerTips("不能为空", "#jdbcPram02", 4, "#78BA32", true);
         allIsOk = false;
     }
     // if (jdbcInput.all.parameter == null || jdbcInput.all.parameter.trim() == "") {
@@ -139,15 +139,15 @@ function JDBCInputVerification() {
     //     allIsOk = false;
     // }
     if (jdbcInput.all.username == null || jdbcInput.all.username.trim() == "") {
-        LayerTips("不能为空", "#jdbcPram04", 4, "#dbcf17",true);
+        LayerTips("不能为空", "#jdbcPram04", 4, "#dbcf17", true);
         allIsOk = false;
     }
     if (jdbcInput.all.password == null || jdbcInput.all.password.trim() == "") {
-        LayerTips("不能为空", "#jdbcPram05", 4, "#4938ba",true);
+        LayerTips("不能为空", "#jdbcPram05", 4, "#4938ba", true);
         allIsOk = false;
     }
     if (jdbcInput.all.sql == null || jdbcInput.all.sql.trim() == "") {
-        LayerTips("不能为空", "#jdbcPram06", 4, "#ff75a7",true);
+        LayerTips("不能为空", "#jdbcPram06", 4, "#ff75a7", true);
         allIsOk = false;
     }
 
@@ -156,7 +156,7 @@ function JDBCInputVerification() {
 
 // ###########################################【  Layui抽方法 ↓   】##############################################################
 //四个方向的tips层
-function LayerTips(msg, selector, position, color,tipsMore) {
+function LayerTips(msg, selector, position, color, tipsMore) {
     layui.use('layer', function () {
         var layer = layui.layer;
         layer.tips(msg, selector, {

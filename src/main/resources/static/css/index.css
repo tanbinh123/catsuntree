@@ -24,7 +24,35 @@
 
 #formTips > div {
     margin-bottom: 1px;
+}
 
+/*展示区的span元素加蓝加粗*/
+div[id^="result_path0"] span {
+    font-weight: bold;
+    color: #0000FF;
+}
+
+#result_path03 > form > div {
+    margin-bottom: 1px;
+}
+
+#tips p {
+    word-wrap: break-word;
+}
+
+#mainTreeSpace {
+    background-color: white;
+    margin-right: 7px;
+    border-radius: 6px;
+    padding: 8px 25px 15px 5px;
+    opacity: 0.85;
+    margin-bottom: 40px;
+    min-height: 40px;
+}
+
+#tips {
+    z-index: 999;
+    opacity: 0.85;
 }
 
 /*#############################################################################################################################*/
@@ -40,6 +68,7 @@
     border-radius: 9px;
     background-color: wheat;
     padding: 10px 15px 10px 15px;
+    z-index: 98;
 }
 
 

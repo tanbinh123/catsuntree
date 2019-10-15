@@ -5,18 +5,21 @@
     <title>CATSUNTREE</title>
     <link rel="stylesheet" href="../static/framework/layui-v2.5.4/layui/css/layui.css">
     <link rel="stylesheet" href="../static/framework/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="../static/framework/zTree_v3-master/css/zTreeStyle/zTreeStyle.css">
     <!--custom css-->
     <link rel="stylesheet" href="../static/css/index.css">
     <!--framework JavaScript-->
     <script src="../static/framework/Jquery/jquery-3.4.1.js"></script>
     <script src="../static/framework/vue/vue.js"></script>
     <script src="../static/framework/layui-v2.5.4/layui/layui.js"></script>
+    <script src="../static/framework/zTree_v3-master/js/jquery.ztree.all.js"></script>
     <!--custom js-->
     <script src="../static/js/bootstrap.js"></script>
     <script src="../static/js/businessAnimation.js"></script>
     <!--testing-->
     <!--<link rel="stylesheet" href="../static/css/testing.css">-->
     <script src="../static/js/testing.js"></script>
+
 </head>
 <body id="body">
 <!--===========================================================================================================-->
@@ -64,77 +67,91 @@
         <ul id="mainTree" class="ztree"></ul>
     </div>
     <!--信息区-->
-    <div id="tips" style="padding: 5px;background-color: wheat;border-radius: 4px;min-width: 450px;">
+    <div id="tips" style="padding: 5px;background-color: wheat;border-radius: 4px;min-width: 450px;max-width: 500px;">
         <!--手风琴展示 lay-accordion:开启手风琴-->
         <div class="layui-collapse" lay-accordion>
-            <div class="layui-colla-item">
+            <div class="layui-colla-item" id="accordionPart1">
                 <h2 class="layui-colla-title"><i class="fa fa-tags"></i>&nbsp;提交记录</h2>
                 <div class="layui-colla-content">
-                    <p>You build current tree with the following submit info:</p>
-                </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title"><i class="fa fa-registered"></i>&nbsp;返回信息</h2>
-                <div class="layui-colla-content">内容区域</div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title"><i class="fa fa-gear fa-spin"></i>&nbsp;树形菜单配置</h2>
-                <div class="layui-colla-content">
-                    <!--layui-show-->
-                    <p>根据得到的元素栽种你的树：</p>
-                    <form id="formTips" class="layui-form layui-form-pane" action="">
-                        <!--选择栏目id-->
-                        <div class="layui-form-item">
-                            <div class="layui-form-mid layui-word-aux">将</div>
-                            <div class="layui-input-inline">
-                                <select name="city" lay-verify="required">
-                                    <option value=""></option>
-                                    <option value="0">北京</option>
-                                    <option value="1">上海</option>
-                                    <option value="2">广州</option>
-                                    <option value="3">深圳</option>
-                                    <option value="4">杭州</option>
-                                </select>
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">作为栏目ID</div>
-                        </div>
-                        <!--选择父栏目id-->
-                        <div class="layui-form-item">
-                            <div class="layui-form-mid layui-word-aux">将</div>
-                            <div class="layui-input-inline">
-                                <select name="city" lay-verify="required">
-                                    <option value=""></option>
-                                    <option value="0">北京</option>
-                                    <option value="1">上海</option>
-                                    <option value="2">广州</option>
-                                    <option value="3">深圳</option>
-                                    <option value="4">杭州</option>
-                                </select>
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">作为父栏目ID</div>
-                        </div>
-                        <!--选择栏目名称-->
-                        <div class="layui-form-item">
-                            <div class="layui-form-mid layui-word-aux">将</div>
-                            <div class="layui-input-inline">
-                                <select name="city" lay-verify="required">
-                                    <option value=""></option>
-                                    <option value="0">北京</option>
-                                    <option value="1">上海</option>
-                                    <option value="2">广州</option>
-                                    <option value="3">深圳</option>
-                                    <option value="4">杭州</option>
-                                </select>
-                            </div>
-                            <div class="layui-form-mid layui-word-aux">作为节点展示名称</div>
-                        </div>
-                    </form>
-                    <div style="text-align: right;">
-                        <button type="button" class="layui-btn layui-btn-sm"><i class="fa fa-tree"></i></button>
+                    <div id="result_path01">
+                        <p><span>提交时间：</span>{{all.commitInfo.commitTime}}</p>
+                        <p><span>url：</span>{{all.commitInfo.url}}</p>
+                        <p><span>dbname：</span>{{all.commitInfo.dbname}}</p>
+                        <p><span>parameter：</span>{{all.commitInfo.parameter}}</p>
+                        <p><span>username：</span>{{all.commitInfo.username}}</p>
+                        <p><span>password：</span>{{all.commitInfo.password}}</p>
+                        <p><span>sql：</span>{{all.commitInfo.sql}}</p>
                     </div>
                 </div>
             </div>
-
+            <div class="layui-colla-item" id="accordionPart2">
+                <h2 class="layui-colla-title"><i class="fa fa-registered"></i>&nbsp;返回信息</h2>
+                <div class="layui-colla-content">
+                    <div id="result_path02">
+                        <p><span>返回时间：</span>{{all.resultTime}}</p>
+                        <p><span>状态：</span>{{all.status}}</p>
+                        <p><span>信息：</span>{{all.msg}}</p>
+                        <p><span>查询完成时间：</span>{{all.result.queryFinishDate}}</p>
+                        <p><span>tableName：</span>{{all.result.tableName}}</p>
+                        <p><span>columnCount：</span>{{all.result.columnCount}}</p>
+                        <p><span>字段：</span>{{all.result.columnFields.join(',')}}</p>
+                        <p><span>数据量：</span>{{all.result.list.length}}</p>
+                    </div>
+                    <!--尝试将数据打印至控制台打印-->
+                    <button id="showInConsole" type="button" class="layui-btn layui-btn-xs">
+                        <i id="showInConsole_i" class="fa fa-print">&nbsp;console.log</i>
+                    </button>
+                </div>
+            </div>
+            <div class="layui-colla-item" id="accordionPart3">
+                <h2 class="layui-colla-title"><i class="fa fa-gear fa-spin"></i>&nbsp;树形菜单配置</h2>
+                <div class="layui-colla-content">
+                    <p>根据得到的元素栽种你的树：</p>
+                    <div id="result_path03">
+                        <form class="layui-form" action="" lay-filter="columnForm">
+                            <!--选择栏目id-->
+                            <div class="layui-form-item" id="selectCid_father">
+                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-input-inline">
+                                    <select lay-verify="required" id="selectCid">
+                                        <option value=""></option>
+                                        <option v-for="fieldName in all.result.columnFields" :value="fieldName">{{fieldName}}</option>
+                                    </select>
+                                </div>
+                                <div id="selectCid_forTips" class="layui-form-mid layui-word-aux">作为栏目ID</div>
+                            </div>
+                            <!--选择父栏目id-->
+                            <div class="layui-form-item" id="selectPCid_father">
+                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-input-inline">
+                                    <select lay-verify="required" id="selectPCid">
+                                        <option value=""></option>
+                                        <option v-for="fieldName in all.result.columnFields" v-bind:value="fieldName">{{fieldName}}</option>
+                                    </select>
+                                </div>
+                                <div id="selectPCid_forTips" class="layui-form-mid layui-word-aux">作为父栏目ID</div>
+                            </div>
+                            <!--选择栏目名称-->
+                            <div class="layui-form-item" id="selectCname_father">
+                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-input-inline">
+                                    <select lay-verify="required" id="selectCname">
+                                        <option value=""></option>
+                                        <option v-for="fieldName in all.result.columnFields" :value="fieldName">{{fieldName}}</option>
+                                    </select>
+                                </div>
+                                <div id="selectCname_forTips" class="layui-form-mid layui-word-aux">作为栏目名称</div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="text-align: right;">
+                        <!--种树-->
+                        <button id="buildTree" type="button" class="layui-btn layui-btn-sm layui-anim">
+                            <i id="buildTree_i" class="fa fa-tree"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -312,7 +329,7 @@
 </div>
 <!--===========================================================================================================-->
 <!--iframe cat-->
-<div id="iframeCat" style="position: fixed;bottom: 2px;right: 260px;">
+<div id="iframeCat" style="position: fixed;bottom: 2px;right: 260px; z-index: 20191016">
     <audio id="voice" src="../static/other/catS.wav"></audio>
     <!--<iframe src="https://zhanyuzhang.github.io/lovely-cat/cat.html" frameborder="0"></iframe>-->
     <iframe src="/cat" frameborder="0" style="width: 227px;height: 160px;"></iframe>
