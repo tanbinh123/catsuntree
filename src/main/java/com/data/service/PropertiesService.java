@@ -34,7 +34,8 @@ public class PropertiesService {
                     propsmap.put(key.toString(), value == null ? "" : value.toString());
                 }
             }
-            AwesomeUtils.soutPro("已读取属性文件");
+
+            AwesomeUtils.soutPro("已读取属性文件。lines=" + propsmap.size());
         } catch (FileNotFoundException e) {
             AwesomeUtils.soutPro("找不到属性文件。" + e.getMessage());
             //e.printStackTrace();
