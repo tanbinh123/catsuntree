@@ -41,7 +41,7 @@ div[id^="result_path0"] span {
 }
 
 #mainTreeSpace {
-    background-color: white;
+    /*background-color: white;*/
     margin-right: 7px;
     border-radius: 6px;
     padding: 8px 25px 15px 5px;

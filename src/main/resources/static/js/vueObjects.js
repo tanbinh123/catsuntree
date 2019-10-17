@@ -42,5 +42,70 @@ var RESULTS_03 = new Vue({
 //         status: -99
 // }
 // <############################################################################################################################>
+//JDBC元素散装组合
+var jdbcAssemble_1 = new Vue({
+    el: "#select_a1",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_2 = new Vue({
+    el: "#select_a2",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_3 = new Vue({
+    el: "#select_a3",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_4 = new Vue({
+    el: "#select_a4",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_5 = new Vue({
+    el: "#select_a5",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_6 = new Vue({
+    el: "#select_a6",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+var jdbcAssemble_7 = new Vue({
+    el: "#select_a7",
+    data: {
+        openAnimation: 1,
+        services: [],
+        urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+        status: 0
+    }
+});
+
 
 // <############################################################################################################################>

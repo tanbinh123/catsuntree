@@ -1,33 +1,55 @@
 $(function () {
-    Index_opening();// The opening animation
+    Index_opening();// The opening animation ! allStart in this
     monitoringInputSpace();
     searchButton();
     hideOrShow_jdbcSpaceInput();
     showorHideJDBCboard();
     catVoice();
+    treeFunctionButton();//树功能按钮
+    backToTop();
 });
 // ##############################################################################################################################
-//The following functions are Not only html animation，it might be show in ajax events
-
-
-// ##############################################################################################################################
-// The opening animation
+// The opening animation 需要动画的情况下
 function Index_opening() {
-    var clickCount = 3;
-    $("body").click(function () {
-        clickCount = clickCount - 1;
-        if (clickCount <= 0) {
-            $("#world").fadeOut(1000);
-            setTimeout('Index_opening_next()', 2000);
-        } else {
+    $.ajax({
+        url: "/getProperties",
+        type: "post",
+        timeout: 15000,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            tryFillProperties(jdbcAssemble_1, data);//尝试组装
+            tryFillProperties(jdbcAssemble_2, data);//尝试组装
+            tryFillProperties(jdbcAssemble_3, data);//尝试组装
+            tryFillProperties(jdbcAssemble_4, data);//尝试组装
+            tryFillProperties(jdbcAssemble_5, data);//尝试组装
+            tryFillProperties(jdbcAssemble_6, data);//尝试组装
+            tryFillProperties(jdbcAssemble_7, data);//尝试组装
         }
     });
+    Index_opening_next();
 }
 
-// The opening animation turn on index
+// The opening animation turn on index，不需要动画的情况下，直接调用此方法
 function Index_opening_next() {
     $("#world").remove();
+    //show all we need
+    $("#iframeCat").fadeIn(1000);
+    LayerTips("喵~", "#iframeCat", 4, "black", true);
+    var voice = document.getElementById('voice'); //catVoice
+    if (voice.paused) { //判断音乐是否在播放中，暂停状态
+        voice.play(); //音乐播放
+    } else { //播放状态
+    }
+    $("#JDBCBoardShow").fadeIn(1500);
+    setTimeout('Index_opening_next_next()', 1500);
 }
+
+function Index_opening_next_next() {
+    LayerTips(" ! ", "#JDBCBoardShow", 4, "#ff2433", true);
+}
+
+// ##############################################################################################################################
 
 //monitoring inputSpace
 function monitoringInputSpace() {
@@ -107,6 +129,9 @@ function showorHideJDBCboard() {
         $("#jdbcSpace").addClass("layui-anim layui-anim-fadein");
         $("#JDBCBoardShow").hide();
         $("#JDBCBoardHide").show();
+        $("#share").show();
+        $("#treeButtons").show();
+        $("#treeSpace").show();
     });
 }
 
@@ -116,6 +141,7 @@ function catVoice() {
     $('#iframeCat').mouseover(function () { //点击文字事件
         if (voice.paused) { //判断音乐是否在播放中，暂停状态
             voice.play(); //音乐播放
+            LayerTips("喵~", "#iframeCat", 4, "black", true);
         } else { //播放状态
         }
     });
@@ -186,3 +212,132 @@ function LayerMsg(msg) {
 }
 
 // ###########################################【  Layui抽方法 ↑   】##############################################################
+//尝试将读取的属性文件赋值给vue组件
+function tryFillProperties(obj, data) {
+    // openAnimation: 1,
+    //     services: [],
+    //     urlArray: [], dbnameArray: [], parameterArray: [], usernameArray: [], passwordArray: [], sqlArray: [],
+    //     status: 0
+    obj.openAnimation = data.openAnimation;
+    try {
+        var tempString = data.services;
+        obj.services = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.urlArray;
+        obj.urlArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.dbnameArray;
+        obj.dbnameArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.parameterArray;
+        obj.parameterArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.usernameArray;
+        obj.usernameArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.passwordArray;
+        obj.passwordArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+    try {
+        var tempString = data.sqlArray;
+        obj.sqlArray = eval("(" + tempString + ")");
+    } catch (e) {
+    }
+}
+
+
+// ##############################################################################################################################
+//树功能按钮，基本原理是利用treeObj逆向拿到数据，进行相关操作
+function treeFunctionButton() {
+    $("#expandAll").click(function () {
+        var zTreeObj = $.fn.zTree.getZTreeObj("mainTree");
+        if (zTreeObj != null) {
+            zTreeObj.expandAll(true);//展开全部
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.tips('No trees are being planted ！', '#expandAll');
+            });
+        }
+    });
+    $("#closeAll").click(function () {
+        var zTreeObj = $.fn.zTree.getZTreeObj("mainTree");
+        if (zTreeObj != null) {
+            zTreeObj.expandAll(false);//收起全部
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.tips('No trees are being planted ！', '#closeAll');
+            });
+        }
+    });
+    $("#showCategoryID").click(function () {
+        var zTreeObj = $.fn.zTree.getZTreeObj("mainTree");
+        if (zTreeObj != null) {
+            $.fn.zTree.destroy("mainTree");//先销毁 #treemain 的 zTree
+            var setting = zTreeObj.setting;
+            var cid_fieldName = setting.data.simpleData.idKey;
+            var pcid_fieldName = setting.data.simpleData.pIdKey;
+            var cname_fieldName = setting.data.key.name;
+            //重新组装数据
+            var newList = [];
+            var datasListJSON = RESULTS_02.all.result.list;
+            for (var i = 0; i < datasListJSON.length; i++) {
+                var tempvalue_cid = datasListJSON[i][cid_fieldName];
+                var tempvalue_pcid = datasListJSON[i][pcid_fieldName];
+                var tempvalue_cname = datasListJSON[i][cname_fieldName] + "-" + tempvalue_cid;//将展示名称=cname+cid
+                var tempJSON = {};
+                tempJSON[cid_fieldName] = tempvalue_cid;
+                tempJSON[pcid_fieldName] = tempvalue_pcid;
+                tempJSON[cname_fieldName] = tempvalue_cname;
+                newList.push(tempJSON);
+            }
+            //新拿到的newList重新种树
+            $.fn.zTree.destroy("mainTree");//销毁 #treemain 的 zTree
+            $.fn.zTree.init($("#mainTree"), setting, newList);//树重新初始化
+        }
+    });
+    $("#treeInit").click(function () {
+        treeBuildAction();
+    });
+    $("#cutTree").click(function () {
+        $.fn.zTree.destroy("mainTree");//销毁 #treemain 的 zTree
+    });
+
+}
+
+// ##############################################################################################################################
+function backToTop() {
+    //快速回到顶部功能按钮
+    $("#backTop").click(function () {
+        if ($('html').scrollTop()) {
+            $('html').animate({scrollTop: 0}, 100);//动画效果
+            return false;
+        }
+        $('body').animate({scrollTop: 0}, 100);
+        return false;
+    });
+    //“快速回到顶部”的按钮出现和隐藏
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+            $("#backTop").fadeIn(800);
+        } else {
+            $("#backTop").fadeOut(1000);
+        }
+    });
+}
+// ##############################################################################################################################
+function tips_commitTimeout() {
+    LayerTips("Commit when you ready .", "#search", 4, "#494eff", true);
+}

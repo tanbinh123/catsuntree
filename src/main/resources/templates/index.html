@@ -19,16 +19,15 @@
     <!--testing-->
     <!--<link rel="stylesheet" href="../static/css/testing.css">-->
     <script src="../static/js/testing.js"></script>
-
 </head>
 <body id="body">
 <!--===========================================================================================================-->
-<script src="../static/js/three.min.js"></script>
-<div id="world"></div>
-<script src="../static/js/canvas.js"></script>
+<!--<script src="../static/js/three.min.js"></script>-->
+<!--<div id="world"></div>-->
+<!--<script src="../static/js/canvas.js"></script>-->
 <!--===========================================================================================================-->
 <!--================================================body===========================================================-->
-<div id="treeButtons" style="width: 40px;">
+<div id="treeButtons" style="width: 40px;display: none;">
     <div id="expandAll" title="展开全部">
         <button type="button" class="layui-btn layui-btn-sm layui-bg-orange">
             <i class="layui-icon layui-icon-next"></i>
@@ -61,9 +60,9 @@
         </button>
     </div>
 </div>
-<div id="treeSpace">
+<div id="treeSpace" style="display:none;">
     <!--主要的树-->
-    <div id="mainTreeSpace">
+    <div id="mainTreeSpace" style="background-color: #ecece5">
         <ul id="mainTree" class="ztree"></ul>
     </div>
     <!--信息区-->
@@ -106,12 +105,13 @@
             <div class="layui-colla-item" id="accordionPart3">
                 <h2 class="layui-colla-title"><i class="fa fa-gear fa-spin"></i>&nbsp;树形菜单配置</h2>
                 <div class="layui-colla-content">
-                    <p>根据得到的元素栽种你的树：</p>
+                    <p><i class="fa fa-calendar-check-o"></i>&nbsp;选择配置:</p>
+                    <!--选择字段区-->
                     <div id="result_path03">
                         <form class="layui-form" action="" lay-filter="columnForm">
                             <!--选择栏目id-->
                             <div class="layui-form-item" id="selectCid_father">
-                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-form-mid layui-word-aux"><i class="fa fa-meh-o"></i>&nbsp;将</div>
                                 <div class="layui-input-inline">
                                     <select lay-verify="required" id="selectCid">
                                         <option value=""></option>
@@ -122,7 +122,7 @@
                             </div>
                             <!--选择父栏目id-->
                             <div class="layui-form-item" id="selectPCid_father">
-                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-form-mid layui-word-aux"><i class="fa fa-meh-o"></i>&nbsp;将</div>
                                 <div class="layui-input-inline">
                                     <select lay-verify="required" id="selectPCid">
                                         <option value=""></option>
@@ -133,7 +133,7 @@
                             </div>
                             <!--选择栏目名称-->
                             <div class="layui-form-item" id="selectCname_father">
-                                <div class="layui-form-mid layui-word-aux">将</div>
+                                <div class="layui-form-mid layui-word-aux"><i class="fa fa-meh-o"></i>&nbsp;将</div>
                                 <div class="layui-input-inline">
                                     <select lay-verify="required" id="selectCname">
                                         <option value=""></option>
@@ -144,8 +144,8 @@
                             </div>
                         </form>
                     </div>
+                    <!--种树-->
                     <div style="text-align: right;">
-                        <!--种树-->
                         <button id="buildTree" type="button" class="layui-btn layui-btn-sm layui-anim">
                             <i id="buildTree_i" class="fa fa-tree"></i>
                         </button>
@@ -155,7 +155,7 @@
         </div>
     </div>
 </div>
-<div id="jdbcSpace">
+<div id="jdbcSpace" style="display:none;">
     <!--decoration-->
     <div style="float: right;"><i class="fa fa-wifi"></i>&nbsp;<i class="fa fa-battery"></i></div>
     <!--choose inputStyle from two ways-->
@@ -174,61 +174,61 @@
     <!--两种具体的方式-->
     <div id="jdbcSpaceInput">
         <!--第一种-->
-        <div id="jdbcFormInputSpace" style="display: none">
+        <div id="jdbcFormInputSpace" style="display: none;">
             <form id="jdbcFormInput" class="layui-form layui-form-pane" action="" style="text-align: center">
                 <p><i class="fa fa-paw"></i>你可以灵活选择JDBC配置</p>
                 <p>(在属性文件中添加)</p>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne01_tips">
                     <label class="layui-form-label"><i class="fa fa-paper-plane"></i>&nbsp;url</label>
-                    <div class="layui-input-block">
-                        <select id="url" name="url" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a1">
+                        <select id="url" name="url" lay-verify="required" lay-search lay-filter="wayOne01">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in urlArray" :value="todo.url">{{todo.url}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne02_tips">
                     <label class="layui-form-label"><i class="fa fa-database"></i>&nbsp;dbname</label>
-                    <div class="layui-input-block">
-                        <select id="dbname" name="dbname" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a2">
+                        <select id="dbname" name="dbname" lay-verify="required" lay-search lay-filter="wayOne02">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in dbnameArray" :value="todo.dbname">{{todo.dbname}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne03_tips">
                     <label class="layui-form-label"><i class="fa fa-asterisk fa-spin"></i>parameter</label>
-                    <div class="layui-input-block">
-                        <select id="parameter" name="parameter" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a3">
+                        <select id="parameter" name="parameter" lay-verify="required" lay-search lay-filter="wayOne03">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in parameterArray" :value="todo.parameter">{{todo.parameter}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne04_tips">
                     <label class="layui-form-label"><i class="fa fa-user"></i>&nbsp;username</label>
-                    <div class="layui-input-block">
-                        <select id="username" name="username" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a4">
+                        <select id="username" name="username" lay-verify="required" lay-search lay-filter="wayOne04">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in usernameArray" :value="todo.username">{{todo.username}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne05_tips">
                     <label class="layui-form-label"><i class="fa fa-coffee"></i>password</label>
-                    <div class="layui-input-block">
-                        <select id="password" name="password" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a5">
+                        <select id="password" name="password" lay-verify="required" lay-search lay-filter="wayOne05">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in passwordArray" :value="todo.password">{{todo.password}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="wayOne06_tips">
                     <label class="layui-form-label"><i class="fa fa-cloud"></i>&nbsp;sql</label>
-                    <div class="layui-input-block">
-                        <select id="sql" name="sql" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a6">
+                        <select id="sql" name="sql" lay-verify="required" lay-search lay-filter="wayOne06">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in sqlArray" :value="todo.sql">{{todo.sql}}</option>
                         </select>
                     </div>
                 </div>
@@ -236,33 +236,31 @@
         </div>
         <!--第二种-->
         <div id="jdbcExploreSpace">
-            <form id="jdbcExplore" class="layui-form layui-form-pane" action="" style="text-align: center">
+            <form id="jdbcExplore" class="layui-form layui-form-pane" action="" style="text-align: center" lay-filter="formDB">
                 <p>你可以直接探索服务器&nbsp;<i class="fa fa-mouse-pointer"></i></p>
                 <p>(在属性文件中添加)</p>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="jdbcPreset_Tips">
                     <label class="layui-form-label" title="选择一组配置"><i class="fa fa-cog fa-spin fa-2x"></i></label>
-                    <div class="layui-input-block">
-                        <select id="jdbcPreset" name="jdbcPreset" lay-verify="required" lay-search>
+                    <div class="layui-input-block" id="select_a7">
+                        <select id="jdbcPreset" name="jdbcPreset" lay-verify="required" lay-search lay-filter="FilterServices">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
+                            <option v-for="todo in services" :value="todo.servicename">{{todo.servicename}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="databases_Tips">
                     <label class="layui-form-label"><i class="fa fa-database fa-lg"></i></label>
                     <div class="layui-input-block">
-                        <select id="databases" name="databases" lay-verify="required" lay-search>
+                        <select id="databases" name="databases" lay-verify="required" lay-search lay-filter="FilterDatabases">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item" id="tables_Tips">
                     <label class="layui-form-label"><i class="fa fa-table fa-lg"></i></label>
                     <div class="layui-input-block">
-                        <select id="tables" name="tables" lay-verify="required" lay-search>
+                        <select id="tables" name="tables" lay-verify="required" lay-search lay-filter="FilterTables">
                             <option value=""></option>
-                            <option value="test">示例选项</option>
                         </select>
                     </div>
                 </div>
@@ -284,7 +282,7 @@
         <input id="jdbcPram06" type="text" class="layui-input" placeholder="sql" v-model:value="all.sql">
     </div>
     <!--function button for preview-->
-    <div style="text-align: center;margin-top: 3px; font-size: 20px;">
+    <div style="text-align: center;margin-top: 3px;">
         <span id="history"
               title="As long as non-null validation passes,All submissions will be recorded Whether the server responds or not">
             <i class="fa fa-history" style="color: blue;"></i>查询历史
@@ -308,7 +306,7 @@
 <!--================================================body===========================================================-->
 <!--===========================================================================================================-->
 <!--functionButtons:share-->
-<div style="position: fixed;bottom: 10px;right: 15px;" class="fontAnimation">
+<div style="position: fixed;bottom: 10px;right: 15px;display:none;" class="fontAnimation" id="share">
     <i title="GitHub" class="fa fa-github " style="color: wheat"></i>
     <i title="微信" class="fa fa-wechat " style="color: wheat"></i>
     <i title="Twitter" class="fa fa-twitter " style="color: wheat"></i>
@@ -321,15 +319,15 @@
     <i title="You found the bottom ~    w(ﾟДﾟ)w" class="fa fa-chevron-up" style="color: wheat"></i>
 </div>
 <!--functionButtons:show or Hide JDBCboard-->
-<div style="position: fixed;top: 270px;right: 1px;color: wheat;" id="JDBCBoardHide">
+<div style="position: fixed;top: 270px;right: 1px;color: wheat;display:none;z-index: 100;" id="JDBCBoardHide">
     <i class="fa fa-chevron-right fa-3x"></i>
 </div>
-<div style="position: fixed;top: 270px;right: 1px;color: wheat; display: none;" id="JDBCBoardShow">
+<div style="position: fixed;top: 270px;right: 1px;color: wheat; display: none;z-index: 100;" id="JDBCBoardShow">
     <i class="fa fa-chevron-left fa-3x"></i>
 </div>
 <!--===========================================================================================================-->
 <!--iframe cat-->
-<div id="iframeCat" style="position: fixed;bottom: 2px;right: 260px; z-index: 20191016">
+<div id="iframeCat" style="position: fixed;bottom: 2px;right: 260px; z-index: 20191016;">
     <audio id="voice" src="../static/other/catS.wav"></audio>
     <!--<iframe src="https://zhanyuzhang.github.io/lovely-cat/cat.html" frameborder="0"></iframe>-->
     <iframe src="/cat" frameborder="0" style="width: 227px;height: 160px;"></iframe>

@@ -38,6 +38,8 @@ function watchingIDBCSubmit() {
                             setTimeout('jdbcStatusWaiting()', 2000);//2秒后才能进行下一次提交
                             LayerTips("Query completed ! ", "#accordionPart1", 2, "#009688", true);
                             LayerTips("Choose What your want !", "#accordionPart3", 2, "#009688", true);
+                            setTimeout('tips_commitTips()', 555);
+                            $("#accordionPart3>div[class='layui-colla-content']").addClass("layui-show");//展开手风琴3
                         } else if (data.status == 0) {
                             jdbcCommitStatus.searchingSeen = false;
                             jdbcCommitStatus.searchWarningSeen = true;//提示警告：虽然成功但服务器反馈信息错误
@@ -54,7 +56,7 @@ function watchingIDBCSubmit() {
                     complete: function (XMLHttpRequest, status) {
                         if (status == 'timeout') {//超时,status还有success,error等值的情况
                             jdbcStatusWaiting();//使JDBC提交按钮显示为等待中状态
-                            LayerTips("[timeout]可能原因:数据量过大导致查询超时", "#jdbcCommitStatus", 4, "red", false);
+                            LayerTips("[timeout]", "#jdbcCommitStatus", 4, "red", false);
                         } else if (status == 'error') {
                             jdbcStatusWaiting();//使JDBC提交按钮显示为等待中状态
                             LayerTips("[error]服务器可能未开启或其他原因", "#jdbcCommitStatus", 4, "red", false);
@@ -227,42 +229,58 @@ function updateResults(data) {
 //点击种树事件
 function buildTree() {
     $("#buildTree").click(function () {
-        try {
-            var columnCount = RESULTS_02.all.result.columnCount;
-            if (columnCount >= 3) {
-                var cid = $("#selectCid").find("option:selected").val();
-                var pcid = $("#selectPCid").find("option:selected").val();
-                var cname = $("#selectCname").find("option:selected").val();
-                var allSelected = true;
-                if (cid == "" || cid == null) {
-                    LayerTips("必须项", "#selectCid_forTips", 2, "#ff5722", true);
-                    allSelected = false;
-                }
-                if (pcid == "" || pcid == null) {
-                    LayerTips("必须项", "#selectPCid_forTips", 2, "#ff5722", true);
-                    allSelected = false;
-                }
-                if (cname == "" || cname == null) {
-                    LayerTips("必须项", "#selectCname_forTips", 2, "#ff5722", true);
-                    allSelected = false;
-                }
-                if (allSelected) {
-                    //种树
-                    var setting = {
-                        "async": {"enable": false},
-                        "check": {"enable": false, "autoCheckTrigger": true},
-                        "data": {"simpleData": {"enable": true, "idKey": cid, "pIdKey": pcid}, "key": {"name": cname}},
-                        "callback": {"onClick": ""}
-                    };
-                    var treeList = RESULTS_02.all.result.list;
-                    $.fn.zTree.init($("#mainTree"), setting, treeList);//树重新初始化
-                }
-
-            } else {
-                LayerTips("字段数不足3列，你可能得不到期望的结果", "#buildTree", 2, "#009688", true);
-            }
-        } catch (e) {
-            LayerTips("字段要求不符", "#buildTree", 2, "#009688", true);
-        }
+        treeBuildAction();
     });
+}
+
+// <############################################################################################################################>
+function treeBuildAction() {
+    try {
+        var columnCount = RESULTS_02.all.result.columnCount;
+        if (columnCount >= 3) {
+            var cid = $("#selectCid").find("option:selected").val();
+            var pcid = $("#selectPCid").find("option:selected").val();
+            var cname = $("#selectCname").find("option:selected").val();
+            var allSelected = true;
+            if (cid == "" || cid == null) {
+                LayerTips("必须项", "#selectCid_forTips", 2, "#ff5722", true);
+                allSelected = false;
+            }
+            if (pcid == "" || pcid == null) {
+                LayerTips("必须项", "#selectPCid_forTips", 2, "#ff5722", true);
+                allSelected = false;
+            }
+            if (cname == "" || cname == null) {
+                LayerTips("必须项", "#selectCname_forTips", 2, "#ff5722", true);
+                allSelected = false;
+            }
+            if (allSelected) {
+                //种树
+                var setting = {
+                    "async": {"enable": false},
+                    "check": {"enable": false, "autoCheckTrigger": true},
+                    "data": {"simpleData": {"enable": true, "idKey": cid, "pIdKey": pcid}, "key": {"name": cname}},
+                    "callback": {"onClick": ""}
+                };
+                var treeList = RESULTS_02.all.result.list;
+                var izTreeObj = $.fn.zTree.init($("#mainTree"), setting, treeList);//树重新初始化
+                if (izTreeObj != null) {
+                    $("#accordionPart3>div[class='layui-colla-content']").removeClass("layui-show");//收起手风琴3
+                    LayerTips("Successful ! Check by yourself.", "#mainTreeSpace", 2, "#ff5722", true);
+                } else {
+                    LayerTips("Something wrong", "#mainTreeSpace", 2, "#ff5722", true);
+                }
+            }
+        } else {
+            LayerTips("字段数不足3列，你可能得不到期望的结果", "#buildTree", 2, "#009688", true);
+        }
+    } catch (e) {
+        LayerTips("字段要求不符", "#buildTree", 2, "#009688", true);
+    }
+}
+
+// <############################################################################################################################>
+// 一些无伤大雅的UI服务的函数，通常是为了setTimeout()函数服务
+function tips_commitTips() {
+    LayerTips("Tree init when you ready .", "#buildTree", 2, "#506c96", true);
 }
