@@ -312,6 +312,7 @@ function treeFunctionButton() {
         treeBuildAction();
     });
     $("#cutTree").click(function () {
+
         $.fn.zTree.destroy("mainTree");//销毁 #treemain 的 zTree
     });
 

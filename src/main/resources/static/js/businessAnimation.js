@@ -5,6 +5,7 @@ $(function () {
     showInConsole();//数据量较大的情况下可打印在控制台
     watchFormSelect();//监测layui的表单需要重新渲染事件
     buildTree();//监测种树请求事件
+    // watchJDBCInputer();//太碍眼了，不启用
 });
 
 // ##############################################################################################################################
@@ -163,6 +164,39 @@ function filljdbcSpacePrepareSpace(params) {
     jdbcInput.all.username = params.username;
     jdbcInput.all.password = params.password;
     jdbcInput.all.sql = params.sql;
+    //提示
+    LayerTips("已加载", "#jdbcPram01", 2, "#333fdb", true);
+    LayerTips("已加载", "#jdbcPram02", 2, "#75baaa", true);
+    LayerTips("已加载", "#jdbcPram03", 2, "#4938ba", true);
+    LayerTips("已加载", "#jdbcPram04", 2, "#0e0cff", true);
+    LayerTips("已加载", "#jdbcPram05", 2, "#4938ba", true);
+    LayerTips("已加载", "#jdbcPram06", 2, "#0e0cff", true);
+
+
+}
+
+function watchJDBCInputer() {
+    //检查发生改变进行提示
+// data: {all: {url: "", dbname: "", parameter: "", username: "", password: "", sql: "", commitTime: ""}}
+    jdbcInput.$watch('all.url', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram01", 2, "#dbd008", true);
+    });
+    jdbcInput.$watch('all.dbname', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram02", 2, "#dbd008", true);
+    });
+    jdbcInput.$watch('all.parameter', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram03", 2, "#dbd008", true);
+    });
+    jdbcInput.$watch('all.username', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram04", 2, "#dbd008", true);
+    });
+    jdbcInput.$watch('all.password', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram05", 2, "#dbd008", true);
+    });
+    jdbcInput.$watch('all.sql', function (newValue, oldValue) {
+        LayerTips("refreshed", "#jdbcPram06", 2, "#dbd008", true);
+    });
+
 }
 
 // <############################################################################################################################>
@@ -235,6 +269,10 @@ function buildTree() {
 
 // <############################################################################################################################>
 function treeBuildAction() {
+    if (!$("#accordionPart3>div[class='layui-colla-content']").hasClass("layui-show")) {
+        //没展开的情况下则展开面板
+        $("#accordionPart3>div[class='layui-colla-content']").addClass("layui-show");
+    }
     try {
         var columnCount = RESULTS_02.all.result.columnCount;
         if (columnCount >= 3) {

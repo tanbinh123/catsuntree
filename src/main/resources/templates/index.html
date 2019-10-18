@@ -66,6 +66,7 @@
         <ul id="mainTree" class="ztree"></ul>
     </div>
     <!--信息区-->
+    <div></div>
     <div id="tips" style="padding: 5px;background-color: wheat;border-radius: 4px;min-width: 450px;max-width: 500px;">
         <!--手风琴展示 lay-accordion:开启手风琴-->
         <div class="layui-collapse" lay-accordion>
@@ -177,7 +178,7 @@
         <div id="jdbcFormInputSpace" style="display: none;">
             <form id="jdbcFormInput" class="layui-form layui-form-pane" action="" style="text-align: center">
                 <p><i class="fa fa-paw"></i>你可以灵活选择JDBC配置</p>
-                <p>(在属性文件中添加)</p>
+                <p>(在属性文件中添加你常用的元素)</p>
                 <div class="layui-form-item" id="wayOne01_tips">
                     <label class="layui-form-label"><i class="fa fa-paper-plane"></i>&nbsp;url</label>
                     <div class="layui-input-block" id="select_a1">
@@ -237,8 +238,8 @@
         <!--第二种-->
         <div id="jdbcExploreSpace">
             <form id="jdbcExplore" class="layui-form layui-form-pane" action="" style="text-align: center" lay-filter="formDB">
-                <p>你可以直接探索服务器&nbsp;<i class="fa fa-mouse-pointer"></i></p>
-                <p>(在属性文件中添加)</p>
+                <p>你可以直接探索服务器、动态加载&nbsp;<i class="fa fa-mouse-pointer"></i></p>
+                <p>(在属性文件中预设更多服务器)</p>
                 <div class="layui-form-item" id="jdbcPreset_Tips">
                     <label class="layui-form-label" title="选择一组配置"><i class="fa fa-cog fa-spin fa-2x"></i></label>
                     <div class="layui-input-block" id="select_a7">
@@ -293,7 +294,7 @@
         <span id="emptyJDBC" style="color: red;"><i class="fa fa-trash"></i>清空</span>
     </div>
     <div style="height: 2vh;">
-        <!--        占位DIV-->
+        <!--just take some height-->
     </div>
     <!--JDBC commit button-->
     <div style="text-align: center;margin-top: 3px;" id="jdbcCommitStatus" v-bind:name="status">
