@@ -16,6 +16,12 @@ $(function () {
         });
         //监测数据库select
         form.on('select(FilterServices)', function (data) {
+            var value = data.value;
+            console.log(value);
+            if (value == null || value == "") {
+                LayerTips("Can't be NULL", "#jdbcPreset_Tips", 4, "#837aff", false);
+                return;
+            }
             $("#databases").empty();
             $("#databases").append('<option value=""></option>');
             layui.use('form', function () {
@@ -23,7 +29,6 @@ $(function () {
                 form.render('select', 'formDB'); //刷新select选择框渲染
             });
             LayerTips("waiting.....", "#jdbcPreset_Tips", 4, "#837aff", false);
-            var value = data.value;
             var services = jdbcAssemble_7.services;
             for (var i = 0; i < services.length; i++) {
                 if (services[i].servicename == value) {
@@ -89,6 +94,11 @@ $(function () {
         });
         //监测表select
         form.on('select(FilterDatabases)', function (data) {
+            var testNull = data.value;
+            if (testNull == null || testNull == "") {
+                LayerTips("Can't be NULL", "#databases_Tips", 4, "#837aff", false);
+                return;
+            }
             $("#tables").empty();
             $("#tables").append('<option value=""></option>');
             layui.use('form', function () {
@@ -160,6 +170,11 @@ $(function () {
         });
         //监测表选中
         form.on('select(FilterTables)', function (data) {
+            var testNull = data.value;
+            if (testNull == null || testNull == "") {
+                LayerTips("Can't be NULL", "#tables_Tips", 4, "#837aff", false);
+                return;
+            }
             var tableName = data.value;
             jdbcInput.all.sql = "select * from " + tableName;
             LayerTips("Great! Now check and commit.", "#jdbcPram06", 4, "#48baff", true);

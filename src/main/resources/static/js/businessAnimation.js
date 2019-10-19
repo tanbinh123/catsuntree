@@ -100,6 +100,7 @@ function useOrClearExampleJDBC() {
         jdbcInput.all.username = "zhsdevelop";
         jdbcInput.all.password = "southnet";
         jdbcInput.all.sql = "select * from channel";
+        watchJDBCInputer();
     });
     // JDBC清空，利用vue双向绑定
     $("#emptyJDBC").click(function () {
@@ -109,7 +110,7 @@ function useOrClearExampleJDBC() {
         jdbcInput.all.username = "";
         jdbcInput.all.password = "";
         jdbcInput.all.sql = "";
-        LayerTips("已清空", "#emptyJDBC", 3, true);
+        LayerTips("已清空", "#emptyJDBC", 3, false);
     });
 }
 
@@ -165,38 +166,16 @@ function filljdbcSpacePrepareSpace(params) {
     jdbcInput.all.password = params.password;
     jdbcInput.all.sql = params.sql;
     //提示
+    watchJDBCInputer();
+}
+
+function watchJDBCInputer() {
     LayerTips("已加载", "#jdbcPram01", 2, "#333fdb", true);
     LayerTips("已加载", "#jdbcPram02", 2, "#75baaa", true);
     LayerTips("已加载", "#jdbcPram03", 2, "#4938ba", true);
     LayerTips("已加载", "#jdbcPram04", 2, "#0e0cff", true);
     LayerTips("已加载", "#jdbcPram05", 2, "#4938ba", true);
     LayerTips("已加载", "#jdbcPram06", 2, "#0e0cff", true);
-
-
-}
-
-function watchJDBCInputer() {
-    //检查发生改变进行提示
-// data: {all: {url: "", dbname: "", parameter: "", username: "", password: "", sql: "", commitTime: ""}}
-    jdbcInput.$watch('all.url', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram01", 2, "#dbd008", true);
-    });
-    jdbcInput.$watch('all.dbname', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram02", 2, "#dbd008", true);
-    });
-    jdbcInput.$watch('all.parameter', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram03", 2, "#dbd008", true);
-    });
-    jdbcInput.$watch('all.username', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram04", 2, "#dbd008", true);
-    });
-    jdbcInput.$watch('all.password', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram05", 2, "#dbd008", true);
-    });
-    jdbcInput.$watch('all.sql', function (newValue, oldValue) {
-        LayerTips("refreshed", "#jdbcPram06", 2, "#dbd008", true);
-    });
-
 }
 
 // <############################################################################################################################>
