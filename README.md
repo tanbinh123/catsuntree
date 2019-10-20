@@ -85,7 +85,7 @@
 >>(1.1.3)第三种方式：直接在预览区的书写区手写。
 >>
 >>另外，当前版本还添加了历史提交快速填充的功能，方便你重新查询。
->>![history](http://m.qpic.cn/psb?/V12x3UMs3ekTkH/auFVStuG.gp4IZeREOMf1pXvVZvB7CcujnVlYp17wls!/b/dLYAAAAAAAAA&bo=ZAwhBAAAAAADF38!&rf=viewer_4&t=5)
+>>![history](http://m.qpic.cn/psb?/V12x3UMs3ekTkH/FqrOFeeAHLOfUA*g.qw4TTIy6NDpENyPJYXhCQq*ISg!/b/dFIBAAAAAAAA&bo=ZAwhBAAAAAADF38!&rf=viewer_4&t=5)
 >>
 >>至此，三种方式介绍完毕。
 - - - 
