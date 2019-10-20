@@ -33,7 +33,7 @@
 > [step01] **动态加载服务器下所有的库和表**
 >>(1.1.1) 动态加载服务器下所有的库和表(也是最推荐的使用方式).
 >>
->>首先在在tree.properties文件中添加配置
+>>首先在在tree.properties文件中添加配置(请注意properties文件是单行模式).
 >>~~~
 >>services=[{
 >>  	"servicename": "219",
@@ -109,4 +109,4 @@
     by the way，If you have better suggestions or comments, please send them to my email，Thanks!
     By another way,The ownership of the cat belongs to the original author,Invasion and deletion.        
 
-###Finally,Enjoy yourself ！
+### Finally,Enjoy yourself ！ 
