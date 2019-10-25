@@ -11,6 +11,12 @@ $(function () {
 // ##############################################################################################################################
 // The opening animation 需要动画的情况下
 function Index_opening() {
+    index_first();
+    Index_opening_next();
+}
+
+//加载配置函数
+function index_first() {
     $.ajax({
         url: "/getProperties",
         type: "post",
@@ -27,8 +33,8 @@ function Index_opening() {
             tryFillProperties(jdbcAssemble_7, data);//尝试组装
         }
     });
-    Index_opening_next();
 }
+
 
 // The opening animation turn on index，不需要动画的情况下，直接调用此方法
 function Index_opening_next() {
@@ -338,6 +344,7 @@ function backToTop() {
         }
     });
 }
+
 // ##############################################################################################################################
 function tips_commitTimeout() {
     LayerTips("Commit when you ready .", "#search", 4, "#494eff", true);

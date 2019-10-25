@@ -6,6 +6,7 @@ $(function () {
     watchFormSelect();//监测layui的表单需要重新渲染事件
     buildTree();//监测种树请求事件
     // watchJDBCInputer();//太碍眼了，不启用
+    reloadProperties();//手动重置配置文件加载
 });
 
 // ##############################################################################################################################
@@ -33,6 +34,7 @@ function watchingIDBCSubmit() {
                         console.log(data);
                         //完成ajax后按照状态码有不同的操作
                         if (data.status == 1) {
+                            $.fn.zTree.destroy("mainTree");//为了避免被误导，这里如果已有栏木树的话也销毁掉
                             updateResults(data);//只有查询成功才更新面板数据？！
                             jdbcCommitStatus.searchingSeen = false;
                             jdbcCommitStatus.searchSuccessSeen = true;//提示成功
@@ -294,6 +296,14 @@ function treeBuildAction() {
     } catch (e) {
         LayerTips("字段要求不符", "#buildTree", 2, "#009688", true);
     }
+}
+
+// <############################################################################################################################>
+function reloadProperties() {
+    $("#eggs_reloadProperties").click(function () {
+        index_first();
+    });
+
 }
 
 // <############################################################################################################################>
