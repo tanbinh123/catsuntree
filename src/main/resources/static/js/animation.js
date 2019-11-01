@@ -13,6 +13,7 @@ $(function () {
 function Index_opening() {
     index_first();
     Index_opening_next();
+    forJDBCBoardShow();//特殊：直接展示需要的界面。此方法也可以注释掉
 }
 
 //加载配置函数
@@ -52,7 +53,9 @@ function Index_opening_next() {
 }
 
 function Index_opening_next_next() {
-    LayerTips(" ! ", "#JDBCBoardShow", 4, "#ff2433", true);
+    if ($("#JDBCBoardShow").length > 0) {
+        LayerTips(" ! ", "#JDBCBoardShow", 4, "#ff2433", true);
+    }
 }
 
 // ##############################################################################################################################
@@ -131,14 +134,19 @@ function showorHideJDBCboard() {
         $("#JDBCBoardShow").show();
     });
     $("#JDBCBoardShow").click(function () {
-        $("#jdbcSpace").show();
-        $("#jdbcSpace").addClass("layui-anim layui-anim-fadein");
-        $("#JDBCBoardShow").hide();
-        $("#JDBCBoardHide").show();
-        $("#share").show();
-        $("#treeButtons").show();
-        $("#treeSpace").show();
+        forJDBCBoardShow();
     });
+}
+
+//为了跳过动画，将这些动作抽调成函数方便调用
+function forJDBCBoardShow() {
+    $("#jdbcSpace").show();
+    $("#jdbcSpace").addClass("layui-anim layui-anim-fadein");
+    $("#JDBCBoardShow").hide();
+    $("#JDBCBoardHide").show();
+    $("#share").show();
+    $("#treeButtons").show();
+    $("#treeSpace").show();
 }
 
 // click and cat voice
