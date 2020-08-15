@@ -13,3 +13,6 @@ mybatis:
   type-aliases-package: com.data
   mapper-locations: /mapper/*.xml
 
+#自定义信息
+chrome:
+  url: C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chrome.exe
